@@ -1,60 +1,797 @@
 {
-    "cultures": [
+    "constellation_data": [
       {
-        "name": "Greco-Roman (Modern Western)",
-        "snippet": "The basis for the 88 'official' constellations recognized today by the International Astronomical Union. They are rooted in the mythology of ancient Greece and Rome.",
+        "name": "Ojibwe",
+        "snippet": "Ojibwe star lore features animals and hunters from their local environment, such as the Fisher, with constellation stories that are tied to the changing seasons.",
         "constellations": [
           {
-            "name": "Orion",
-            "description": "The Hunter. A prominent, easily recognizable constellation. In Greek myth, Orion was a giant hunter, often depicted battling Taurus the Bull or chasing the Pleiades."
+            "common_name": "Ursa Major / Big Dipper",
+            "local_name": "Fisher",
+            "description": "A great hunter, Fisher, traveled to Skyland to bring summer to his people. He was shot by the Sky People and turned into stars. His orientation changes with the seasons, reflecting his story of falling in winter and being on his feet again in summer."
+          }
+        ]
+      },
+      {
+        "name": "Cree",
+        "snippet": "Cree mythology explains the stars through epic battles, practical guidance, and foundational creation stories, reflecting a deep spiritual connection to the cosmos.",
+        "constellations": [
+          {
+            "common_name": "Ursa Major / Big Dipper",
+            "local_name": "Mista Muskwa",
+            "description": "The Great Bear, who sits atop the stars of the Big Dipper. He was a bully defeated by seven brave birds (Corona Borealis)."
           },
           {
-            "name": "Ursa Major",
-            "description": "The Great Bear. It contains the famous asterism, the Big Dipper. In one Greek myth, the nymph Callisto was turned into a bear by Zeus to protect her from Hera's wrath."
+            "common_name": "Pleiades",
+            "local_name": "Pakone Kisik",
+            "description": "The Hole in the Sky. This is where the Star Woman fell from another dimension to become the first human on Earth, teaching that 'We come from the stars'."
           },
           {
-            "name": "Cassiopeia",
-            "description": "The Queen. A 'W' or 'M' shaped constellation in the northern sky. In Greek mythology, Cassiopeia was punished by Poseidon for her vanity by being placed in the heavens."
+            "common_name": "Orion's Belt",
+            "local_name": "Three Chiefs",
+            "description": "A line of three chiefs."
           },
           {
-            "name": "Sagittarius",
-            "description": "The Archer. A zodiac constellation representing a centaur with a bow and arrow. It's associated with the mythological centaur Chiron in some interpretations."
+            "common_name": "Polaris (North Star)",
+            "local_name": "Guide of the People",
+            "description": "A name reflecting its practical use in navigation."
+          },
+          {
+            "common_name": "Milky Way",
+            "local_name": "Ghost Road",
+            "description": "A road for spirits or ghosts."
+          },
+          {
+            "common_name": "Corona Borealis",
+            "local_name": "Seven Brave Birds",
+            "description": "The birds that defeated the bully bear, Mista Muskwa (associated with the Big Dipper)."
+          },
+          {
+            "common_name": "Mars",
+            "local_name": "Mooswa Acak / Kitom Pampaniw",
+            "description": "Moose Spirit / Circles back. The name reflects Mars's retrograde motion, which mirrors a startled moose running in a circle before continuing on its way."
+          }
+        ]
+      },
+      {
+        "name": "Iroquois",
+        "snippet": "Iroquois star patterns often center on terrestrial narratives like the Bear and the Hunters, using the sky to preserve significant cultural stories and for practical wayfinding.",
+        "constellations": [
+          {
+            "common_name": "Ursa Major / Big Dipper",
+            "local_name": "The Bear and The Hunters",
+            "description": "The bowl of the dipper is the Bear, and the three stars of the handle are the hunters pursuing it."
+          },
+          {
+            "common_name": "Pleiades",
+            "local_name": "Dancers",
+            "description": "A group of celestial dancers."
+          },
+          {
+            "common_name": "Polaris (North Star)",
+            "local_name": "Star that does not move",
+            "description": "A name reflecting its key observational property."
+          }
+        ]
+      },
+      {
+        "name": "Inuit",
+        "snippet": "Inuit astronomy reflects the necessities of an Arctic environment, featuring local fauna like the Caribou and hunters who are constantly in motion.",
+        "constellations": [
+          {
+            "common_name": "Ursa Major / Big Dipper",
+            "local_name": "Tukturjuit",
+            "description": "Giant Caribou, reflecting the local fauna of the Arctic."
+          },
+          {
+            "common_name": "Orion's Belt",
+            "local_name": "Ullaktut",
+            "description": "The Runners' or 'Three Hunters' chasing their prey."
+          }
+        ]
+      },
+      {
+        "name": "Snohomish",
+        "snippet": "Snohomish star lore features animals of regional importance, like the Great Elk, connecting the night sky to their immediate terrestrial world.",
+        "constellations": [
+          {
+            "common_name": "Ursa Major / Big Dipper",
+            "local_name": "Great Elk",
+            "description": "An elk, another animal of regional importance."
+          }
+        ]
+      },
+      {
+        "name": "Arapaho",
+        "snippet": "Arapaho star patterns are tied to important regional wildlife, interpreting the Big Dipper as Bison Bulls.",
+        "constellations": [
+          {
+            "common_name": "Ursa Major / Big Dipper",
+            "local_name": "Bison Bulls",
+            "description": "The stars are seen as Bison Bulls."
+          }
+        ]
+      },
+      {
+        "name": "Cherokee",
+        "snippet": "Cherokee constellations feature moral tales about community and obedience, like the boys turned to stars, and the paths of spiritual creatures.",
+        "constellations": [
+          {
+            "common_name": "Pleiades",
+            "local_name": "The Boys",
+            "description": "Seven boys who neglected their chores to play a game. When their mothers scolded them, they prayed to the spirits and were lifted into the sky to become the seven stars."
+          },
+          {
+            "common_name": "Milky Way",
+            "local_name": "Dog Trail",
+            "description": "The path taken by a spirit dog."
+          }
+        ]
+      },
+      {
+        "name": "Blackfoot",
+        "snippet": "Blackfoot cosmology includes stories of lost children, spiritual guides like the Wolf, and significant sacred lodges in the night sky.",
+        "constellations": [
+          {
+            "common_name": "Pleiades",
+            "local_name": "Lost Children",
+            "description": "A group of children who became lost and were placed in the sky."
+          },
+          {
+            "common_name": "Milky Way",
+            "local_name": "Wolf Trail",
+            "description": "Wolves were the first to pity the starving people and taught them how to survive. The trail is their path in the sky."
+          },
+          {
+            "common_name": "Corona Borealis",
+            "local_name": "Spiderman's Lodge",
+            "description": "The lodge or home of a spider spirit."
+          }
+        ]
+      },
+      {
+        "name": "Tlingit",
+        "snippet": "Tlingit star patterns are often simple, descriptive names for star alignments, such as the Men in a Line for Orion's Belt.",
+        "constellations": [
+          {
+            "common_name": "Orion's Belt",
+            "local_name": "Men in a Line",
+            "description": "A simple descriptive name for the three aligned stars."
+          }
+        ]
+      },
+      {
+        "name": "Apache",
+        "snippet": "Apache star patterns sometimes reference anatomy, seeing the three stars of Orion's Belt as the Three Vertebrae of an animal's spine.",
+        "constellations": [
+          {
+            "common_name": "Orion's Belt",
+            "local_name": "Three Vertebrae",
+            "description": "The stars are seen as the vertebrae of an animal's spine."
+          }
+        ]
+      },
+      {
+        "name": "Paiute",
+        "snippet": "Paiute lore explains the immobility of the North Star through the story of a mountain sheep that became trapped and was immortalized in the sky.",
+        "constellations": [
+          {
+            "common_name": "Polaris (North Star)",
+            "local_name": "Fixed Star",
+            "description": "A mountain sheep named Na-gah who climbed a peak and became trapped. His father turned him into a star that didn't move so everyone could see him."
+          }
+        ]
+      },
+      {
+        "name": "Lakota",
+        "snippet": "Lakota cosmology uses the stars for spiritual guidance, naming the North Star as 'Star that stands still' and the Milky Way as the 'Spirit Path' to the afterlife.",
+        "constellations": [
+          {
+            "common_name": "Polaris (North Star)",
+            "local_name": "Star that stands still",
+            "description": "Another name reflecting its immobility."
+          },
+          {
+            "common_name": "Milky Way",
+            "local_name": "Spirit Path",
+            "description": "The path that spirits take to the afterlife."
+          }
+        ]
+      },
+      {
+        "name": "Shawnee",
+        "snippet": "Shawnee star groups feature celestial figures, like the group of stars in Corona Borealis seen as the Celestial Sisters.",
+        "constellations": [
+          {
+            "common_name": "Corona Borealis",
+            "local_name": "Celestial Sisters",
+            "description": "A group of sisters in the sky."
+          }
+        ]
+      },
+      {
+        "name": "Cheyenne",
+        "snippet": "Cheyenne star patterns often reflect terrestrial objects, with the circular shape of Corona Borealis seen as an Old Camp.",
+        "constellations": [
+          {
+            "common_name": "Corona Borealis",
+            "local_name": "Old Camp",
+            "description": "The circular shape is seen as an old, abandoned campsite."
+          }
+        ]
+      },
+      {
+        "name": "Navajo",
+        "snippet": "Navajo (Diné) constellation names are often descriptive of stellar movement or shape, naming Cassiopeia 'She who revolves' due to its circumpolar motion.",
+        "constellations": [
+          {
+            "common_name": "Cassiopeia",
+            "local_name": "She who revolves",
+            "description": "A name describing its circumpolar motion around the North Star."
+          }
+        ]
+      },
+      {
+        "name": "Zuni",
+        "snippet": "Zuni lore uses simple descriptions for recognizable shapes, calling the 'W' shape of Cassiopeia the Zig Zag.",
+        "constellations": [
+          {
+            "common_name": "Cassiopeia",
+            "local_name": "Zig Zag",
+            "description": "A descriptive name for the 'W' shape of the constellation."
+          }
+        ]
+      },
+      {
+        "name": "Pawnee",
+        "snippet": "Pawnee constellations feature local animals, seeing the Cassiopeia constellation as a Rabbit.",
+        "constellations": [
+          {
+            "common_name": "Cassiopeia",
+            "local_name": "Rabbit",
+            "description": "The constellation is seen as a rabbit."
           }
         ]
       },
       {
         "name": "Ancient Chinese",
-        "snippet": "The Chinese system divided the sky into four main symbolic animals (or 'Symbols'), each associated with a direction and a season. These were further divided into 28 Lunar Mansions and hundreds of smaller asterisms ('Xingguan').",
+        "snippet": "The Chinese system mapped the sky into **Four Symbols** and **28 Lunar Mansions** that divided the ecliptic, deeply integrating astronomy with timekeeping, mythology, and governance. Names often reflect the asterism's practical or cosmological purpose.",
         "constellations": [
           {
-            "name": "Azure Dragon of the East (Cāng Lóng)",
-            "description": "One of the Four Symbols, associated with Spring and the element Wood. It spans seven Lunar Mansions, representing parts of the dragon's body."
+            "common_name": "Virgo (Spica)",
+            "local_name": "Jiǎo (Horn)",
+            "description": "Associated with the Crocodile. First mansion of the Azure Dragon of the East."
           },
           {
-            "name": "White Tiger of the West (Bái Hǔ)",
-            "description": "One of the Four Symbols, associated with Autumn and the element Metal. It represents the fierce guardian of the western sky."
+            "common_name": "Virgo (Kappa Virginis)",
+            "local_name": "Kàng (Neck)",
+            "description": "Associated with the Dragon. Second mansion of the Azure Dragon of the East."
           },
           {
-            "name": "Tien Ta Tsaeng (Heaven's Great General)",
-            "description": "A star group located in the area of the Western constellation Andromeda, often depicting a high-ranking military figure."
+            "common_name": "Libra (Alpha Librae)",
+            "local_name": "Dǐ (Root)",
+            "description": "Associated with the Badger. Third mansion of the Azure Dragon of the East."
+          },
+          {
+            "common_name": "Scorpius (Pi Scorpii)",
+            "local_name": "Fáng (Room)",
+            "description": "Associated with the Hare. Fourth mansion of the Azure Dragon of the East."
+          },
+          {
+            "common_name": "Scorpius (Antares)",
+            "local_name": "Xīn (Heart)",
+            "description": "Associated with the Fox. Fifth mansion of the Azure Dragon of the East."
+          },
+          {
+            "common_name": "Scorpius (Mu Scorpii)",
+            "local_name": "Wěi (Tail)",
+            "description": "Associated with the Tiger. Sixth mansion of the Azure Dragon of the East."
+          },
+          {
+            "common_name": "Sagittarius (Gamma Sagittarii)",
+            "local_name": "Jī (Winnowing Basket)",
+            "description": "Associated with the Leopard. Seventh mansion of the Azure Dragon of the East."
+          },
+          {
+            "common_name": "Sagittarius (Phi Sagittarii)",
+            "local_name": "Dǒu (Southern Dipper)",
+            "description": "Associated with the Unicorn. First mansion of the Black Tortoise of the North."
+          },
+          {
+            "common_name": "Capricornus (Beta Capricorni)",
+            "local_name": "Niú (Ox)",
+            "description": "Associated with the Buffalo. Second mansion of the Black Tortoise of the North."
+          },
+          {
+            "common_name": "Aquarius (Epsilon Aquarii)",
+            "local_name": "Nǚ (Girl)",
+            "description": "Associated with the Bat. Third mansion of the Black Tortoise of the North."
+          },
+          {
+            "common_name": "Aquarius (Beta Aquarii)",
+            "local_name": "Xū (Emptiness)",
+            "description": "Associated with the Rat. Fourth mansion of the Black Tortoise of the North."
+          },
+          {
+            "common_name": "Aquarius (Alpha Aquarii)",
+            "local_name": "Wēi (Rooftop)",
+            "description": "Associated with the Swallow. Fifth mansion of the Black Tortoise of the North."
+          },
+          {
+            "common_name": "Pegasus (Alpha Pegasi)",
+            "local_name": "Shì (House)",
+            "description": "Associated with the Pig. Sixth mansion of the Black Tortoise of the North."
+          },
+          {
+            "common_name": "Pegasus (Gamma Pegasi)",
+            "local_name": "Bì (Wall)",
+            "description": "Associated with the Porcupine. Seventh mansion of the Black Tortoise of the North."
+          },
+          {
+            "common_name": "Andromeda (Zeta Andromedae)",
+            "local_name": "Kuí (Legs)",
+            "description": "Associated with the Wolf. First mansion of the White Tiger of the West."
+          },
+          {
+            "common_name": "Aries (Beta Arietis)",
+            "local_name": "Lóu (Bond)",
+            "description": "Associated with the Dog. Second mansion of the White Tiger of the West."
+          },
+          {
+            "common_name": "Aries (35 Arietis)",
+            "local_name": "Wèi (Stomach)",
+            "description": "Associated with the Pheasant. Third mansion of the White Tiger of the West."
+          },
+          {
+            "common_name": "Taurus (Pleiades)",
+            "local_name": "Mǎo (Hairy Head)",
+            "description": "Associated with the Cockerel. Fourth mansion of the White Tiger of the West."
+          },
+          {
+            "common_name": "Taurus (Epsilon Tauri)",
+            "local_name": "Bì (Net)",
+            "description": "Associated with the Crow. Fifth mansion of the White Tiger of the West."
+          },
+          {
+            "common_name": "Orion (Lambda Orionis)",
+            "local_name": "Zuǐ (Turtle Beak)",
+            "description": "Associated with the Monkey. Sixth mansion of the White Tiger of the West."
+          },
+          {
+            "common_name": "Orion's Belt",
+            "local_name": "Shēn (Three Stars)",
+            "description": "Associated with the Gibbon. Seventh mansion of the White Tiger of the West."
+          },
+          {
+            "common_name": "Gemini (Mu Geminorum)",
+            "local_name": "Jǐng (Well)",
+            "description": "Associated with the Tapir. First mansion of the Vermilion Bird of the South."
+          },
+          {
+            "common_name": "Cancer (Theta Cancri)",
+            "local_name": "Guǐ (Ghost)",
+            "description": "Associated with the Goat. Second mansion of the Vermilion Bird of the South."
+          },
+          {
+            "common_name": "Hydra (Delta Hydrae)",
+            "local_name": "Liǔ (Willow)",
+            "description": "Associated with the Stag. Third mansion of the Vermilion Bird of the South."
+          },
+          {
+            "common_name": "Hydra (Alphard)",
+            "local_name": "Xīng (Star)",
+            "description": "Associated with the Horse. Fourth mansion of the Vermilion Bird of the South."
+          },
+          {
+            "common_name": "Hydra (Upsilon1 Hydrae)",
+            "local_name": "Zhāng (Extended Net)",
+            "description": "Associated with the Ox. Fifth mansion of the Vermilion Bird of the South."
+          },
+          {
+            "common_name": "Crater (Alpha Crateris)",
+            "local_name": "Yì (Wings)",
+            "description": "Associated with the Snake. Sixth mansion of the Vermilion Bird of the South."
+          },
+          {
+            "common_name": "Corvus (Gamma Corvi)",
+            "local_name": "Zhěn (Chariot)",
+            "description": "Associated with the Worm. Seventh mansion of the Vermilion Bird of the South."
           }
         ]
       },
       {
-        "name": "Diné (Navajo)",
-        "snippet": "Navajo astronomy (Diné Siyizí) places constellations into categories like 'male,' 'female,' and 'traveling' groups, which play a role in traditional teachings and ceremonies. They focus on the functional and narrative aspects of the stars.",
+        "name": "Ancient Egyptian",
+        "snippet": "Egyptian astronomy was intertwined with religion and rituals, using star groups like the Foreleg and the Hippopotamus to symbolize eternity, guide rituals, and herald the Nile's vital flood.",
         "constellations": [
           {
-            "name": "Átse E’tsoh (First Big One)",
-            "description": "A northern constellation, often equated with the Big Dipper. It represents a male deity who instructs the people in the order and rules of the universe."
+            "common_name": "Orion",
+            "local_name": "Sah",
+            "description": "The celestial form of the god Osiris, ruler of the underworld. A symbol of death and resurrection."
           },
           {
-            "name": "Gah Hóóyeel (Rabbit Tracks)",
-            "description": "A group of stars that, when seen in the winter sky, signaled that winter was truly setting in. It’s part of a female deity's constellation, representing fertility and growth."
+            "common_name": "Sirius (in Canis Major)",
+            "local_name": "Sopdet",
+            "description": "The goddess Isis. Her heliacal rising heralded the annual flooding of the Nile and the start of the new year."
           },
           {
-            "name": "Átse Ats'oosí (First Slender One)",
-            "description": "This is the Navajo interpretation of the stars that form the modern Western constellation Orion, seen as a bow-and-arrow-wielding warrior, symbolizing protection."
+            "common_name": "Ursa Major (Big Dipper)",
+            "local_name": "Meskhetyu",
+            "description": "The Foreleg. Represents the leg of the god Seth. As a circumpolar ('imperishable') constellation, it symbolized eternity and immortality. Used in temple foundation rituals to determine north."
+          },
+          {
+            "common_name": "Draco (parts of)",
+            "local_name": "Isis-Hesat",
+            "description": "The Female Hippopotamus. A protective mother goddess figure, often depicted holding a mooring post to control the 'imperishable' stars."
+          },
+          {
+            "common_name": "Cassiopeia (parts of)",
+            "local_name": "Seret",
+            "description": "The Sheep. A southern constellation depicted as a sheep or ram standing in a boat."
+          },
+          {
+            "common_name": "Argo Navis (parts of)",
+            "local_name": "Wia",
+            "description": "The Boat. A southern constellation representing a celestial boat, a common motif for divine travel."
+          }
+        ]
+      },
+      {
+        "name": "Vedic (Hindu)",
+        "snippet": "Vedic astronomy is organized by **27 Nakṣatras** (Lunar Mansions) that define the Moon's daily path, each ruled by a deity and possessing specific powers, reflecting profound spiritual and astrological significance.",
+        "constellations": [
+          {
+            "common_name": "Aries",
+            "local_name": "Ashwini",
+            "description": "Horse's Head. Ruled by Ashvins (Physicians of the Gods). The power to heal and begin new things quickly."
+          },
+          {
+            "common_name": "Aries",
+            "local_name": "Bharani",
+            "description": "Yoni (Female Organ). Ruled by Yama (God of Death). The power of restraint and renewal; transformation and the cycle of birth and death."
+          },
+          {
+            "common_name": "Taurus (Pleiades)",
+            "local_name": "Krittika",
+            "description": "Knife or Spear. Ruled by Agni (God of Fire). The power to burn, cut, and purify."
+          },
+          {
+            "common_name": "Taurus (Aldebaran)",
+            "local_name": "Rohini",
+            "description": "Ox Cart. Ruled by Prajapati/Brahma (The Creator). The power to make things grow and create; fertility and abundance. The Moon's favorite wife."
+          },
+          {
+            "common_name": "Orion",
+            "local_name": "Mrigashirsha",
+            "description": "Deer's Head. Ruled by Soma (The Moon God). The power to give fulfillment and joy; searching and seeking."
+          },
+          {
+            "common_name": "Orion/Gemini (Betelgeuse)",
+            "local_name": "Ardra",
+            "description": "Teardrop or Diamond. Ruled by Rudra (The Storm God). The power to make effort and achieve; overcoming struggle."
+          },
+          {
+            "common_name": "Gemini (Castor & Pollux)",
+            "local_name": "Punarvasu",
+            "description": "Bow and Quiver. Ruled by Aditi (Mother of the Gods). The power to gain wealth or substance; renewal and return of hope."
+          },
+          {
+            "common_name": "Cancer",
+            "local_name": "Pushya",
+            "description": "Cow's Udder or Flower. Ruled by Brihaspati (Priest of the Gods). The power to create spiritual energy; nourishment and care."
+          },
+          {
+            "common_name": "Hydra",
+            "local_name": "Ashlesha",
+            "description": "Coiled Serpent. Ruled by Nagas (Serpent Deities). The power to inflict poison and destroy; intense, penetrating insight."
+          },
+          {
+            "common_name": "Leo (Regulus)",
+            "local_name": "Magha",
+            "description": "Royal Throne. Ruled by Pitris (The Ancestors). The power to leave the body; connection to legacy, tradition, and authority."
+          },
+          {
+            "common_name": "Leo",
+            "local_name": "Purva Phalguni",
+            "description": "Front legs of a bed. Ruled by Bhaga (God of Marital Bliss). The power of procreation; rest, pleasure, and enjoyment."
+          },
+          {
+            "common_name": "Leo/Virgo",
+            "local_name": "Uttara Phalguni",
+            "description": "Back legs of a bed. Ruled by Aryaman (God of Patronage). The power of prosperity through partnership; friendship and commitment."
+          },
+          {
+            "common_name": "Virgo (Corvus)",
+            "local_name": "Hasta",
+            "description": "Hand or Fist. Ruled by Savitar (The Sun God). The power to gain what one seeks and place it in one's hand; skill and creativity."
+          },
+          {
+            "common_name": "Virgo (Spica)",
+            "local_name": "Chitra",
+            "description": "Bright Jewel or Pearl. Ruled by Tvashtar/Vishwakarma (The Celestial Architect). The power to accumulate merit; creating beauty, art, and structure."
+          },
+          {
+            "common_name": "Boötes (Arcturus)",
+            "local_name": "Swati",
+            "description": "Blade of grass. Ruled by Vayu (The Wind God). The power to scatter like the wind; independence and movement."
+          },
+          {
+            "common_name": "Libra",
+            "local_name": "Vishakha",
+            "description": "Triumphal Arch. Ruled by Indra & Agni. The power to achieve many and various fruits in life; ambition and determination."
+          },
+          {
+            "common_name": "Scorpius",
+            "local_name": "Anuradha",
+            "description": "Lotus Flower. Ruled by Mitra (God of Friendship). The power to worship; success through cooperation and devotion."
+          },
+          {
+            "common_name": "Scorpius (Antares)",
+            "local_name": "Jyeshtha",
+            "description": "Earring or Umbrella. Ruled by Indra (Chief of the Gods). The power to rise or conquer; achieving seniority and authority."
+          },
+          {
+            "common_name": "Sagittarius",
+            "local_name": "Mula",
+            "description": "Bunch of roots. Ruled by Nirriti (Goddess of Dissolution). The power to ruin or destroy; getting to the root of matters."
+          },
+          {
+            "common_name": "Sagittarius",
+            "local_name": "Purva Ashadha",
+            "description": "Elephant Tusk or Fan. Ruled by Apas (God of Water). The power to invigorate or energize; purification and renewal."
+          },
+          {
+            "common_name": "Sagittarius",
+            "local_name": "Uttara Ashadha",
+            "description": "Elephant Tusk or Small Bed. Ruled by Visvedevas (The Universal Gods). The power for an unchallengeable victory; lasting success."
+          },
+          {
+            "common_name": "Aquila (Altair)",
+            "local_name": "Shravana",
+            "description": "Ear or Three Footprints. Ruled by Vishnu (The Preserver). The power to connect; listening, learning, and tradition."
+          },
+          {
+            "common_name": "Delphinus",
+            "local_name": "Dhanishtha",
+            "description": "Drum or Flute. Ruled by The Eight Vasus (Deities of Abundance). The power to give fame and abundance; rhythm and wealth."
+          },
+          {
+            "common_name": "Aquarius",
+            "local_name": "Shatabhishak",
+            "description": "Empty Circle or 100 Flowers. Ruled by Varuna (God of the Cosmic Waters). The power of healing; veiling secrets and contemplative insight."
+          },
+          {
+            "common_name": "Pegasus",
+            "local_name": "Purva Bhadrapada",
+            "description": "Swords or Two front legs of a funeral cot. Ruled by Aja Ekapada (One-footed Goat/Serpent). The power to raise a person up in life; spiritual fire and transformation."
+          },
+          {
+            "common_name": "Pegasus/Andromeda",
+            "local_name": "Uttara Bhadrapada",
+            "description": "Back legs of a funeral cot. Ruled by Ahir Budhnya (Serpent of the Deep). The power to bring rain; wisdom and discipline."
+          },
+          {
+            "common_name": "Pisces",
+            "local_name": "Revati",
+            "description": "Fish or a Drum. Ruled by Pushan (The Nourisher). The power of nourishment; providing protection and safe travels."
+          }
+        ]
+      },
+      {
+        "name": "Aboriginal Australian (Various)",
+        "snippet": "Aboriginal Australian groups often use **Dark Cloud Constellations** (the gas and dust lanes of the Milky Way) as sacred figures and rely on the sky for a calendar to time vital seasonal activities like hunting and harvesting.",
+        "constellations": [
+          {
+            "common_name": "Dark Lanes in Milky Way",
+            "local_name": "Gugurmin (The Emu in the Sky)",
+            "description": "Its position is a calendar indicating when to hunt emus and collect their eggs."
+          },
+          {
+            "common_name": "Coalsack Nebula",
+            "local_name": "Tchingal",
+            "description": "An evil emu that terrorized people. The head of the larger Emu in the Sky constellation (Boorong)."
+          },
+          {
+            "common_name": "Pleiades",
+            "local_name": "Seven Sisters (Yugarilya)",
+            "description": "Seven sisters fleeing from a lustful hunter (Orion). The story teaches kinship laws and social rules (Many Groups)."
+          },
+          {
+            "common_name": "Orion",
+            "local_name": "Nyeeruna / Tgilby",
+            "description": "A hunter who pursues the Seven Sisters (Pleiades). His 'fire-magic' hand (Betelgeuse) varies in brightness, reflecting the star's actual variability (Kokatha/Wirangu)."
+          },
+          {
+            "common_name": "Orion",
+            "local_name": "Julpan",
+            "description": "A canoe carrying three brothers (Orion's Belt). It also transports souls to the afterlife. The Orion Nebula is a forbidden fish they caught (Yolŋu)."
+          },
+          {
+            "common_name": "Orion's Belt & Sword",
+            "local_name": "Kulkunbulla",
+            "description": "Two young dancing men, representing the importance of song and dance in cultural transmission (Boorong)."
+          },
+          {
+            "common_name": "Southern Cross",
+            "local_name": "Bunya",
+            "description": "A possum hiding in a tree (Boorong)."
+          },
+          {
+            "common_name": "Southern Cross",
+            "local_name": "Wedge-tailed Eagle",
+            "description": "A powerful creator spirit (Arrernte)."
+          },
+          {
+            "common_name": "Sirius",
+            "local_name": "Warepil",
+            "description": "The male wedge-tailed eagle, chief of the creator elders. His wings spread out to either side of the star (Boorong)."
+          },
+          {
+            "common_name": "Gemini (Castor & Pollux)",
+            "local_name": "Yurree & Wanjel",
+            "description": "Two hunters (a fan-tailed cuckoo and a long-necked tortoise). Their appearance signals seasonal patterns for these animals (Boorong)."
+          },
+          {
+            "common_name": "Vega",
+            "local_name": "Neilloan",
+            "description": "The Mallee fowl. Its appearance in the autumn morning sky signals that the birds are building their nests (Boorong)."
+          },
+          {
+            "common_name": "Altair",
+            "local_name": "Bunjil",
+            "description": "The eagle creator being, flanked by his two black swan wives (the stars Tarazed and Alshain) (Boon Wurrung/Wurundjeri)."
+          },
+          {
+            "common_name": "Magellanic Clouds",
+            "local_name": "Brolga's Eggs",
+            "description": "The eggs of the Brolga, a type of crane (Boorong)."
+          }
+        ]
+      },
+      {
+        "name": "Norse/Viking",
+        "snippet": "Norse cosmology ties constellations to their primary gods and mythological objects, such as Thor's and Odin's chariots, the goddess Frigg's spinning tools, and important practical stars for sea navigation.",
+        "constellations": [
+          {
+            "common_name": "Ursa Major",
+            "local_name": "Karlsvagn / Óðins vagn",
+            "description": "Man's Chariot / Odin's Wagon. Associated with both Thor's and Odin's celestial chariots."
+          },
+          {
+            "common_name": "Ursa Minor",
+            "local_name": "Kvennavagn",
+            "description": "Woman's Chariot. Believed to be the chariot of the goddess Freyja."
+          },
+          {
+            "common_name": "Orion's Belt",
+            "local_name": "Friggjarrokkr",
+            "description": "Frigga's Distaff. The spinning tool of the goddess Frigg, wife of Odin."
+          },
+          {
+            "common_name": "Orion's Belt",
+            "local_name": "Fiskikarlar",
+            "description": "Fishermen. An alternative name, possibly referring to the three stars as fishermen in a line."
+          },
+          {
+            "common_name": "Gemini (Castor & Pollux)",
+            "local_name": "Auguthjaza",
+            "description": "Eyes of Þjazi. The eyes of the giant Þjazi, which Odin placed in the sky as stars after the giant was killed."
+          },
+          {
+            "common_name": "Hyades (in Taurus)",
+            "local_name": "Ulf's Keptr",
+            "description": "Mouth of the Wolf. The mouth of one of the mythological wolves (Sköll or Hati) that hunt the Sun and Moon."
+          },
+          {
+            "common_name": "Corona Borealis",
+            "local_name": "Aurvandil's toe",
+            "description": "The frozen toe of a man named Aurvandil, which Thor broke off and threw into the sky to become a star."
+          },
+          {
+            "common_name": "Polaris",
+            "local_name": "Leiðarstjarna",
+            "description": "Guiding Star. The primary star used for navigation at sea."
+          },
+          {
+            "common_name": "Arcturus",
+            "local_name": "Dagstjarna",
+            "description": "Day Star. A bright star used to anticipate sunrise in the spring at high northern latitudes."
+          },
+          {
+            "common_name": "Vega",
+            "local_name": "Suðrstjarna",
+            "description": "South Star. A bright star marking the southern sky in summer."
+          },
+          {
+            "common_name": "Milky Way",
+            "local_name": "Bifröst",
+            "description": "The Shimmering Path. The burning rainbow bridge connecting Midgard (Earth) to Asgard (the realm of the gods)."
+          }
+        ]
+      },
+      {
+        "name": "Maya",
+        "snippet": "Maya astronomy strongly links the stars to the **creation myth**, seeing constellations like Orion's three stars as the sacred hearth of the cosmos, with the Milky Way serving as the World Tree.",
+        "constellations": [
+          {
+            "common_name": "Orion",
+            "local_name": "Ak' / Oxib Xkub'",
+            "description": "A turtle, or the Three Hearthstones of Creation, with the Orion Nebula as the cosmic fire at the center of creation."
+          },
+          {
+            "common_name": "Pleiades",
+            "local_name": "Tz'ab",
+            "description": "The rattle of a rattlesnake's tail."
+          },
+          {
+            "common_name": "Gemini",
+            "local_name": "Copulating Peccaries",
+            "description": "A pair of copulating peccaries (wild pigs)."
+          },
+          {
+            "common_name": "Ursa Major (Big Dipper)",
+            "local_name": "Seven Macaw",
+            "description": "A boastful mythical parrot from the Popol Vuh creation story, who was taught a lesson by the Hero Twins."
+          },
+          {
+            "common_name": "Milky Way",
+            "local_name": "Wacah Chan",
+            "description": "The World Tree, the central axis of the cosmos."
+          }
+        ]
+      },
+      {
+        "name": "Aztec",
+        "snippet": "Aztec star patterns were crucial for ritual and calendar keeping, particularly the **New Fire Ceremony**, with constellations like the Pleiades and Orion's Belt marking the passage of the 52-year cycle.",
+        "constellations": [
+          {
+            "common_name": "Orion's Belt & Sword",
+            "local_name": "Mamalhuaztli",
+            "description": "The Fire Drill. The sacred tool used to kindle the new fire every 52 years to postpone the end of the world."
+          },
+          {
+            "common_name": "Pleiades",
+            "local_name": "Tianquiztli",
+            "description": "The Marketplace. Its midnight zenith passage every 52 years was the signal for the New Fire Ceremony to ensure the world would not end."
+          },
+          {
+            "common_name": "Scorpius",
+            "local_name": "Colotl",
+            "description": "A scorpion or rattlesnake, an animal of sacred significance."
+          },
+          {
+            "common_name": "Gemini",
+            "local_name": "Ballcourt / Frog",
+            "description": "A ceremonial Ballcourt, or a Frog associated with prayers for rain during a devastating drought."
+          }
+        ]
+      },
+      {
+        "name": "Inca",
+        "snippet": "Inca cosmology uniquely focused on **Dark Cloud Constellations** (the dark dust lanes of the Milky Way), which are seen as important animals like the Llama, Fox, and Serpent, whose celestial cycles relate directly to terrestrial seasons and harvest timing.",
+        "constellations": [
+          {
+            "common_name": "Dark Rift in Milky Way (Centaurus/Crux)",
+            "local_name": "Yacana",
+            "description": "The Great Llama, with a baby llama (Uñallamacha). Its eyes are Alpha and Beta Centauri. It protects all llamas on Earth and drinks the cosmic river to prevent a world-ending flood."
+          },
+          {
+            "common_name": "Dark Rift in Milky Way (Scorpius/Sagittarius)",
+            "local_name": "Atoq",
+            "description": "The Fox, which chases the baby llama. Its appearance coincides with the birth season of terrestrial foxes."
+          },
+          {
+            "common_name": "Coalsack Nebula",
+            "local_name": "Yutu",
+            "description": "The Tinamou (a partridge-like bird). Its position was used to time the potato harvest."
+          },
+          {
+            "common_name": "Dark Rift in Milky Way",
+            "local_name": "Mach'acuay",
+            "description": "The Serpent. Its celestial cycle matches the active season of real snakes in the Andes. Represents the underworld."
+          },
+          {
+            "common_name": "Southern Cross",
+            "local_name": "Chakana",
+            "description": "A powerful symbol in Andean cosmology, representing the three levels of existence (upper world, human world, underworld)."
           }
         ]
       }

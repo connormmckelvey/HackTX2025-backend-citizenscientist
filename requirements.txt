@@ -1,7 +1,9 @@
 streamlit
 pandas
 plotly
+supabase
+requests
+Pillow
 
 # Optional (for future DB support)
 # psycopg2-binary
-# supabase

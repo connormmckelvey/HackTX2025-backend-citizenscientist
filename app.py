@@ -13,6 +13,9 @@ from typing import List, Optional
 import streamlit as st
 import pandas as pd
 import json
+import os
+import tempfile
+from urltoconstallation import setConstellation
 
 from data_loader import load_data
 from visualizations import scatter_map, heatmap_map, time_series
@@ -47,15 +50,50 @@ with col2:
     st.markdown("</div>", unsafe_allow_html=True)
 
 # Config
-# Sidebar: allow toggling mock data vs DB (DB not implemented yet)
+# Sidebar: allow toggling between data sources
 st.sidebar.header("SkyLore")
-use_mock = st.sidebar.checkbox("Use mock data", value=True)
+
+# Data source selection
+data_source = st.sidebar.radio(
+    "Data Source",
+    options=["Mock Data", "Supabase Database"],
+    index=0,  # Default to mock data
+    help="Choose data source for visualizations"
+)
+
+use_db = data_source == "Supabase Database"
 config = DEFAULT_CONFIG.copy()
-config["mode"] = "mock" if use_mock else "db"
+config["mode"] = "db" if use_db else "mock"
+
+# Show current data source status
+if use_db:
+    st.sidebar.success("📊 Connected to Supabase Database")
+else:
+    st.sidebar.info("🧪 Using Mock Data (Testing Mode)")
 
 # Load data
 with st.spinner("Loading data..."):
-    df = load_data(config)
+    try:
+        df = load_data(config)
+
+        # Show data source info
+        if use_db:
+            st.sidebar.metric("Database Records", len(df) if not df.empty else 0)
+        else:
+            st.sidebar.metric("Mock Records", len(df) if not df.empty else 0)
+
+    except ImportError as e:
+        st.error(f"❌ Missing dependency: {e}")
+        st.info("💡 To use database mode, install required packages: `pip install supabase`")
+        st.stop()
+    except ValueError as e:
+        st.error(f"❌ Configuration error: {e}")
+        st.info("💡 Set SUPABASE_URL and SUPABASE_ANON_KEY environment variables")
+        st.stop()
+    except Exception as e:
+        st.error(f"❌ Failed to load data: {e}")
+        st.info("💡 Check your database connection and try again")
+        st.stop()
 
 # Sidebar filters
 st.sidebar.header("Filters")
@@ -66,12 +104,19 @@ min_brightness = st.sidebar.slider("Minimum brightness rating", min_value=1, max
 const_filter = st.sidebar.text_input("Filter by constellation (substring, case-insensitive)")
 
 # Date range
-if not df.empty:
-    min_date = df["timestamp"].min().date()
-    max_date = df["timestamp"].max().date()
+# Ensure timestamps are datetime and handle empty/invalid gracefully
+if not df.empty and "timestamp" in df.columns:
+    timestamps = pd.to_datetime(df["timestamp"], errors="coerce")
 else:
-    min_date = None
-    max_date = None
+    timestamps = pd.Series([], dtype="datetime64[ns]")
+
+if not timestamps.empty and timestamps.notna().any():
+    min_date = timestamps.min().date()
+    max_date = timestamps.max().date()
+else:
+    today = pd.Timestamp("today").date()
+    min_date = today
+    max_date = today
 
 date_range = st.sidebar.date_input("Date range", value=(min_date, max_date))
 
@@ -254,7 +299,103 @@ with col1:
                         - **File:** {uploaded_file.name}
                         """)
 
-                        st.info("In a real implementation, this data would be saved to a database and added to the visualization.")
+                        # Analyze uploaded photo to detect constellations (single upload only)
+                        with st.spinner("🔭 Analyzing photo to identify constellations..."):
+                            try:
+                                # Persist uploaded file to a temporary path
+                                suffix = os.path.splitext(uploaded_file.name)[-1] or ".jpg"
+                                with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp_file:
+                                    tmp_file.write(uploaded_file.getbuffer())
+                                    temp_path = tmp_file.name
+
+                                # Call Astrometry.net workflow to detect constellations
+                                detected_constellations = setConstellation(temp_path) or []
+
+                                if detected_constellations:
+                                    st.success("⭐ Detected constellations:")
+                                    for cname in detected_constellations:
+                                        st.markdown(f"- {cname}")
+                                else:
+                                    st.warning("No constellations could be confidently identified.")
+
+                            except Exception as e:
+                                st.error(f"Constellation detection failed: {e}")
+                            finally:
+                                try:
+                                    if os.path.exists(temp_path):
+                                        os.remove(temp_path)
+                                except Exception:
+                                    pass
+
+                        # Persist the new submission depending on data source
+                        try:
+                            from datetime import datetime
+
+                            # Save uploaded image to a persistent local uploads/ folder
+                            uploads_dir = os.path.join(os.getcwd(), "uploads")
+                            os.makedirs(uploads_dir, exist_ok=True)
+                            saved_filename = f"{datetime.utcnow().strftime('%Y%m%d%H%M%S')}_{uploaded_file.name}"
+                            saved_path = os.path.join(uploads_dir, saved_filename)
+                            with open(saved_path, "wb") as out_f:
+                                out_f.write(uploaded_file.getbuffer())
+
+                            # Normalize record
+                            new_record = {
+                                "id": f"U-{datetime.utcnow().strftime('%Y%m%d%H%M%S%f')}",
+                                "photo_url": saved_path,  # local path usable by st.image
+                                "latitude": float(latitude),
+                                "longitude": float(longitude),
+                                "timestamp": datetime.utcnow().isoformat() + "Z",
+                                "brightness_rating": int(brightness_rating),
+                                "constellation_name": detected_constellations[0] if detected_constellations else "",
+                                "constellation_names": detected_constellations,
+                            }
+
+                            if use_db:
+                                # Insert into Supabase 'photos' table
+                                try:
+                                    from supabase import create_client
+                                    supabase_url = os.environ.get("SUPABASE_URL")
+                                    supabase_key = os.environ.get("SUPABASE_ANON_KEY")
+                                    if not supabase_url or not supabase_key:
+                                        raise ValueError("Missing SUPABASE_URL/SUPABASE_ANON_KEY env variables")
+                                    sb = create_client(supabase_url, supabase_key)
+                                    insert_payload = {
+                                        "id": new_record["id"],
+                                        "created_at": new_record["timestamp"],
+                                        "photo_url": new_record["photo_url"],
+                                        "brightness_level": new_record["brightness_rating"],
+                                        "lat": new_record["latitude"],
+                                        "long": new_record["longitude"],
+                                        # user_id intentionally omitted
+                                    }
+                                    sb.table("photos").insert(insert_payload).execute()
+                                    st.success("📥 Saved to Supabase database")
+                                except Exception as db_e:
+                                    st.error(f"Failed to save to database: {db_e}")
+                            else:
+                                # Append to mock_data.json
+                                try:
+                                    mock_path = DEFAULT_CONFIG.get("mock_path", "mock_data.json")
+                                    # Read existing
+                                    existing = []
+                                    if os.path.exists(mock_path):
+                                        with open(mock_path, "r", encoding="utf-8") as f:
+                                            existing = json.load(f)
+                                            if not isinstance(existing, list):
+                                                existing = []
+                                    existing.append(new_record)
+                                    with open(mock_path, "w", encoding="utf-8") as f:
+                                        json.dump(existing, f, ensure_ascii=False, indent=2, default=str)
+                                    st.success("🧪 Added to mock JSON data")
+                                except Exception as jf_e:
+                                    st.error(f"Failed to append to mock JSON: {jf_e}")
+
+                            # Optionally refresh the app to show new data
+                            st.info("Refreshing to include your submission in visualizations...")
+                            st.rerun()
+                        except Exception as persist_e:
+                            st.error(f"Failed to persist submission: {persist_e}")
 
                     else:
                         st.error("❌ Invalid coordinates. Please check latitude (-90 to 90) and longitude (-180 to 180).")
@@ -322,25 +463,79 @@ As users learn about lost constellations and the stories behind them, they also 
 
         # Load cultural constellations data
         def load_cultural_data():
-        
-            with open("cultural_constellations.json", "r", encoding="utf-8") as f:
-                data = json.load(f)
-                # Convert array format to dictionary format for easier access
-                cultures_dict = {}
-                for culture_obj in data.get("cultures", []):
-                    culture_name = culture_obj.get("name", "")
-                    cultures_dict[culture_name] = culture_obj
+            try:
+                with open("cultural_constellations.json", "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    # Convert new structure to expected format for easier access
+                    cultures_dict = {}
+                    cultures_list = []
+
+                    for culture_obj in data.get("constellation_data", []):
+                        culture_name = culture_obj.get("name", "")
+                        cultures_list.append(culture_name)
+
+                        # Convert constellation structure to expected format
+                        constellations_formatted = []
+                        for const in culture_obj.get("constellations", []):
+                            constellations_formatted.append({
+                                "name": const.get("local_name", ""),
+                                "description": const.get("description", ""),
+                                "common_name": const.get("common_name", "")
+                            })
+
+                        cultures_dict[culture_name] = {
+                            "name": culture_name,
+                            "snippet": culture_obj.get("snippet", ""),
+                            "constellations": constellations_formatted
+                        }
+
+                    return {
+                        "cultures": cultures_list,
+                        **cultures_dict
+                    }
+            except (FileNotFoundError, json.JSONDecodeError):
+                # Fallback to basic structure if file doesn't exist or is malformed
                 return {
-                    "cultures": [c.get("name", "") for c in data.get("cultures", [])],
-                    **cultures_dict
+                    "cultures": ["Ojibwe", "Cree", "Iroquois"],
+                    "Ojibwe": {
+                        "name": "Ojibwe",
+                        "snippet": "Ojibwe star lore features animals and hunters from their local environment.",
+                        "constellations": [
+                            {"name": "Fisher", "description": "A great hunter constellation"}
+                        ]
+                    }
                 }
             
         cultural_data = load_cultural_data()
 
-        # Culture selector
+        # Check if a specific constellation was clicked from the Info tab
+        selected_constellation = st.session_state.get('selected_constellation', '')
+        selected_culture_tab = st.session_state.get('selected_culture_tab', '')
+
+        # Find which culture contains the selected constellation
+        target_culture = None
+        if selected_constellation and selected_culture_tab == "Cultural Constellations":
+            for culture_name, culture_info in cultural_data.items():
+                if isinstance(culture_info, dict) and 'constellations' in culture_info:
+                    for const in culture_info['constellations']:
+                        # Check both local_name and common_name
+                        if (const.get('name', '').lower() == selected_constellation.lower() or
+                            const.get('common_name', '').lower() == selected_constellation.lower()):
+                            target_culture = culture_name
+                            break
+                    if target_culture:
+                        break
+
+        # Culture selector with optional pre-selection
+        culture_options = cultural_data["cultures"]
+        default_index = 0
+        if target_culture and target_culture in culture_options:
+            default_index = culture_options.index(target_culture)
+
         culture = st.selectbox(
             "Choose a cultural tradition:",
-            cultural_data["cultures"],
+            culture_options,
+            index=default_index,
             help="Select a culture to learn about their constellation traditions"
         )
 
@@ -357,10 +552,34 @@ As users learn about lost constellations and the stories behind them, they also 
             if 'constellations' in culture_info and culture_info['constellations']:
                 st.markdown("##### Key Constellations:")
 
+                # Check if we should highlight a specific constellation
+                highlight_constellation = None
+                if selected_constellation and selected_culture_tab == "Cultural Constellations":
+                    highlight_constellation = selected_constellation
+
                 for i, constellation in enumerate(culture_info['constellations'], 1):
-                    st.markdown(f"**{i}. {constellation.get('name', 'Unknown')}**")
-                    st.markdown(f"   {constellation.get('description', 'No description available')}")
-                    st.markdown("")  # Add spacing
+                    const_name = constellation.get('name', 'Unknown')
+                    const_desc = constellation.get('description', 'No description available')
+
+                    # Highlight the selected constellation
+                    if highlight_constellation and (const_name.lower() == highlight_constellation.lower() or
+                                                  constellation.get('common_name', '').lower() == highlight_constellation.lower()):
+                        st.markdown(f"**⭐ {i}. {const_name}** ← *Selected from data*")
+                        if constellation.get('common_name'):
+                            st.markdown(f"   *Also known as: {constellation['common_name']}*")
+                        st.markdown(f"   {const_desc}")
+                        st.markdown("")  # Add spacing
+                    else:
+                        st.markdown(f"**{i}. {const_name}**")
+                        if constellation.get('common_name'):
+                            st.markdown(f"   *Also known as: {constellation['common_name']}*")
+                        st.markdown(f"   {const_desc}")
+                        st.markdown("")  # Add spacing
+
+                # Clear the session state after using it
+                if selected_constellation:
+                    st.session_state.selected_constellation = ''
+                    st.session_state.selected_culture_tab = ''
 
 
 
@@ -388,7 +607,6 @@ with col2:
                     if row.get("photo_url"):
                         st.image(row["photo_url"], width=120)
                 with cols[1]:
-                    st.markdown(f"**ID:** {row['id']}  ")
 
                     # Handle both single and multiple constellations for display
                     def format_constellations(row):
@@ -409,7 +627,37 @@ with col2:
 
                         return 'Unknown'
 
-                    st.markdown(f"**Constellation:** {format_constellations(row)}  ")
+                    # Make constellation name clickable if it exists in cultural data
+                    constellation_display = format_constellations(row)
+                    if constellation_display and constellation_display != 'Unknown':
+                        # Check if this constellation exists in any cultural database
+                        constellation_clickable = False
+                        for culture_name, culture_info in cultural_data.items():
+                            if isinstance(culture_info, dict) and 'constellations' in culture_info:
+                                for const in culture_info['constellations']:
+                                    # Check both local_name and common_name
+                                    if (const.get('name', '').lower() == constellation_display.lower() or
+                                        const.get('common_name', '').lower() == constellation_display.lower()):
+                                        constellation_clickable = True
+                                        break
+                                if constellation_clickable:
+                                    break
+
+                        if constellation_clickable:
+                            # Create clickable constellation link using columns for better styling
+                            col_const, col_link = st.columns([3, 1])
+                            with col_const:
+                                st.markdown(f"**Constellation:** {constellation_display}")
+                            with col_link:
+                                if st.button("🔗 Learn", key=f"const_{row['id']}_{constellation_display}", help="Click to learn about this constellation"):
+                                    # Store the selected constellation in session state
+                                    st.session_state.selected_constellation = constellation_display
+                                    st.session_state.selected_culture_tab = "Cultural Constellations"
+                                    st.rerun()
+                        else:
+                            st.markdown(f"**Constellation:** {constellation_display}  ")
+                    else:
+                        st.markdown(f"**Constellation:** {constellation_display}  ")
                     st.markdown(f"**Brightness:** {row['brightness_rating']}  ")
                     st.markdown(f"**Timestamp:** {row['timestamp']}  ")
                     st.markdown(f"**Location:** {row['latitude']}, {row['longitude']}  ")

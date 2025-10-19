@@ -70,9 +70,49 @@ def load_data(config: Dict) -> pd.DataFrame:
         return df
 
     elif mode == "db":
-        # Placeholder for future DB loading (e.g., Supabase/Postgres). Implement DB access here
-        # and return a DataFrame with the same columns as above.
-        raise NotImplementedError("Database mode not implemented yet. Use mock mode for testing.")
+        # Load from Supabase database
+        try:
+            import os
+            from supabase import create_client, Client
+
+            # Get Supabase credentials from environment variables
+            url = 'https://ldwfbxlhovfjzklkylfg.supabase.co'
+            key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxkd2ZieGxob3ZmanprbGt5bGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA4MTA2NDAsImV4cCI6MjA3NjM4NjY0MH0.vPj2qJYpz8IplrPWLbrXcZljIcsAk6e1eUBjcwQgLgI'
+
+            if not url or not key:
+                raise ValueError("SUPABASE_URL and SUPABASE_ANON_KEY environment variables required")
+
+            supabase: Client = create_client(url, key)
+
+            # Fetch all submissions from Supabase
+            response = supabase.table('photos').select('*').execute()
+            data = response.data
+
+            if not data:
+                # Return empty DataFrame with correct structure if no data
+                return pd.DataFrame(columns=["id", "photo_url", "latitude", "longitude", "timestamp", "brightness_rating", "constellation_name", "constellation_names"])
+
+            records = []
+            for entry in data:
+                records.append({
+                    "id": entry.get("id"),
+                    "photo_url": entry.get("photo_url"),
+                    "latitude": float(entry.get("lat")),
+                    "longitude": float(entry.get("long")),
+                    "timestamp": _parse_timestamp_utc(entry.get("created_at")),
+                    "brightness_rating": int(entry.get("brightness_level")),
+                    "constellation_name": "",  # Not available in Supabase schema
+                    "constellation_names": [],  # Not available in Supabase schema
+                })
+
+            df = pd.DataFrame.from_records(records)
+            df = df.sort_values("timestamp").reset_index(drop=True)
+            return df
+
+        except ImportError:
+            raise ImportError("Supabase client not installed. Install with: pip install supabase")
+        except Exception as e:
+            raise RuntimeError(f"Failed to load from Supabase: {str(e)}")
 
     else:
         raise ValueError(f"Unknown mode: {mode}")

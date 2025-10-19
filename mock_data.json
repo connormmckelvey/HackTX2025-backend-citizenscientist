@@ -1,7 +1,7 @@
 [
   {
     "id": "SL-101",
-    "photo_url": "https://images.unsplash.com/photo-1429041966141-9a6f2de4f47d?w=800&q=80",
+    "photo_url": "https://www.nps.gov/subjects/nightskies/images/GLOBELM6.jpg",
     "latitude": 40.63650311121492,
     "longitude": -73.9411334444685,
     "timestamp": "2026-01-01T19:34:00",
@@ -14,7 +14,7 @@
   },
   {
     "id": "SL-102",
-    "photo_url": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
+    "photo_url": "https://www.adlerplanetarium.org/wp-content/uploads/Merdith-Stepian-Sark-Island.png",
     "latitude": 29.85744620421327,
     "longitude": -95.3624239905696,
     "timestamp": "2026-01-01T22:56:00",
@@ -26,7 +26,7 @@
   },
   {
     "id": "SL-103",
-    "photo_url": "https://images.unsplash.com/photo-1422452228503-a1d9b0b3d2a6?w=800&q=80",
+    "photo_url": "https://images.stockcake.com/public/e/1/1/e11c8779-33c7-456b-acbb-de7d58c60874_large/starry-night-sky-stockcake.jpg",
     "latitude": 39.875213158190945,
     "longitude": -75.22736070493428,
     "timestamp": "2026-01-01T21:12:00",
@@ -39,7 +39,7 @@
   },
   {
     "id": "SL-104",
-    "photo_url": "https://images.unsplash.com/photo-1505678261036-a3fcc5e884ee?w=800&q=80",
+    "photo_url": "https://images.unsplash.com/photo-1740518937347-5d29b7e2f11d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8",
     "latitude": 32.714373597187084,
     "longitude": -96.72927684075671,
     "timestamp": "2026-01-01T20:39:00",
@@ -621,11 +621,14 @@
   {
     "id": "SL-201",
     "latitude": 40.7128,
-    "longitude": -74.0060,
+    "longitude": -74.006,
     "brightness_rating": 4,
     "timestamp": "2026-03-01T21:00:00Z",
     "photo_url": "https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=800&q=80",
-    "constellation_names": ["Ursa Major", "Cassiopeia"]
+    "constellation_names": [
+      "Ursa Major",
+      "Cassiopeia"
+    ]
   },
   {
     "id": "SL-202",
@@ -634,7 +637,11 @@
     "brightness_rating": 5,
     "timestamp": "2026-03-01T22:30:00Z",
     "photo_url": "https://images.unsplash.com/photo-1524255787836-8a0a99676c16?w=800&q=80",
-    "constellation_names": ["Orion", "Canis Major", "Taurus"]
+    "constellation_names": [
+      "Orion",
+      "Canis Major",
+      "Taurus"
+    ]
   },
   {
     "id": "SL-203",
@@ -643,16 +650,23 @@
     "brightness_rating": 2,
     "timestamp": "2026-03-02T23:45:00Z",
     "photo_url": "https://images.unsplash.com/photo-1507525428034-b732cf195b86?w=800&q=80",
-    "constellation_names": ["Perseus", "Andromeda"]
+    "constellation_names": [
+      "Perseus",
+      "Andromeda"
+    ]
   },
   {
     "id": "SL-204",
     "latitude": 33.4484,
-    "longitude": -112.0740,
+    "longitude": -112.074,
     "brightness_rating": 5,
     "timestamp": "2026-03-03T20:15:00Z",
     "photo_url": "https://images.unsplash.com/photo-1476511473105-0219c6e3b5e1?w=800&q=80",
-    "constellation_names": ["Lyra", "Cygnus", "Aquila"]
+    "constellation_names": [
+      "Lyra",
+      "Cygnus",
+      "Aquila"
+    ]
   },
   {
     "id": "SL-205",
@@ -661,7 +675,10 @@
     "brightness_rating": 3,
     "timestamp": "2026-03-03T19:30:00Z",
     "photo_url": "https://images.unsplash.com/photo-1422452228503-a1d9b0b3d2a6?w=800&q=80",
-    "constellation_names": ["Gemini", "Leo"]
+    "constellation_names": [
+      "Gemini",
+      "Leo"
+    ]
   },
   {
     "id": "SL-206",
@@ -670,7 +687,11 @@
     "brightness_rating": 5,
     "timestamp": "2026-03-04T20:55:00Z",
     "photo_url": "https://images.unsplash.com/photo-1505678261036-a3fcc5e884ee?w=800&q=80",
-    "constellation_names": ["Virgo", "Libra", "Scorpius"]
+    "constellation_names": [
+      "Virgo",
+      "Libra",
+      "Scorpius"
+    ]
   },
   {
     "id": "SL-207",
@@ -679,7 +700,10 @@
     "brightness_rating": 1,
     "timestamp": "2026-03-05T21:10:00Z",
     "photo_url": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80",
-    "constellation_names": ["Draco", "Cepheus"]
+    "constellation_names": [
+      "Draco",
+      "Cepheus"
+    ]
   },
   {
     "id": "SL-208",
@@ -688,7 +712,10 @@
     "brightness_rating": 4,
     "timestamp": "2026-03-06T22:20:00Z",
     "photo_url": "https://images.unsplash.com/photo-1464802686167-b939a6910659?w=800&q=80",
-    "constellation_names": ["Sagittarius", "Capricornus"]
+    "constellation_names": [
+      "Sagittarius",
+      "Capricornus"
+    ]
   },
   {
     "id": "SL-209",
@@ -697,7 +724,11 @@
     "brightness_rating": 5,
     "timestamp": "2026-03-07T23:05:00Z",
     "photo_url": "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?w=800&q=80",
-    "constellation_names": ["Pegasus", "Aquarius", "Pisces"]
+    "constellation_names": [
+      "Pegasus",
+      "Aquarius",
+      "Pisces"
+    ]
   },
   {
     "id": "SL-210",
@@ -706,6 +737,21 @@
     "brightness_rating": 5,
     "timestamp": "2026-03-07T20:40:00Z",
     "photo_url": "https://images.unsplash.com/photo-1444044205806-38f3ed106c10?w=800&q=80",
-    "constellation_names": ["Crux", "Centaurus"]
+    "constellation_names": [
+      "Crux",
+      "Centaurus"
+    ]
+  },
+  {
+    "id": "U-20251019151250585946",
+    "photo_url": "C:\\Users\\conno\\OneDrive\\Documents\\GitHub\\HackTX2025-backend-citizenscientist\\uploads\\20251019151250_teststarphoto.jpeg",
+    "latitude": 40.7128,
+    "longitude": -74.006,
+    "timestamp": "2025-10-19T15:12:50.586258Z",
+    "brightness_rating": 3,
+    "constellation_name": "Bootes",
+    "constellation_names": [
+      "Bootes"
+    ]
   }
 ]
