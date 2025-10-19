@@ -1,0 +1,7 @@
+streamlit
+pandas
+plotly
+
+# Optional (for future DB support)
+# psycopg2-binary
+# supabase

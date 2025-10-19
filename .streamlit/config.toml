@@ -1,0 +1,21 @@
+[theme]
+# Base theme: dark
+base = "dark"
+
+# Main app colors
+primaryColor = "#7DA87B"               # muted green for buttons, sliders, highlights
+backgroundColor = "#2B1F14"            # very dark brown for main background
+secondaryBackgroundColor = "#3A2C1D"   # slightly lighter brown for sidebar
+textColor = "#E6E2D3"                   # soft cream text for readability
+font = "sans serif"
+
+# Sidebar border visibility
+showSidebarBorder = true
+
+# Chart colors (greens, browns, earthy accents)
+chartCategoricalColors = ["#7DA87B", "#4B7744", "#A8C9A0", "#8B6D5C", "#D9E5D2"]
+chartSequentialColors = ["#2B1F14", "#3A2C1D", "#4B7744", "#7DA87B", "#A8C9A0"]
+
+[theme.sidebar]
+primaryColor = "#A8C9A0"               # lighter green for sidebar highlights
+backgroundColor = "#3A2C1D"            # matches sidebar background
