@@ -617,5 +617,95 @@
       "Virgo",
       "Capricornus"
     ]
+  },
+  {
+    "id": "SL-201",
+    "latitude": 40.7128,
+    "longitude": -74.0060,
+    "brightness_rating": 4,
+    "timestamp": "2026-03-01T21:00:00Z",
+    "photo_url": "https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=800&q=80",
+    "constellation_names": ["Ursa Major", "Cassiopeia"]
+  },
+  {
+    "id": "SL-202",
+    "latitude": 34.0522,
+    "longitude": -118.2437,
+    "brightness_rating": 5,
+    "timestamp": "2026-03-01T22:30:00Z",
+    "photo_url": "https://images.unsplash.com/photo-1524255787836-8a0a99676c16?w=800&q=80",
+    "constellation_names": ["Orion", "Canis Major", "Taurus"]
+  },
+  {
+    "id": "SL-203",
+    "latitude": 41.8781,
+    "longitude": -87.6298,
+    "brightness_rating": 2,
+    "timestamp": "2026-03-02T23:45:00Z",
+    "photo_url": "https://images.unsplash.com/photo-1507525428034-b732cf195b86?w=800&q=80",
+    "constellation_names": ["Perseus", "Andromeda"]
+  },
+  {
+    "id": "SL-204",
+    "latitude": 33.4484,
+    "longitude": -112.0740,
+    "brightness_rating": 5,
+    "timestamp": "2026-03-03T20:15:00Z",
+    "photo_url": "https://images.unsplash.com/photo-1476511473105-0219c6e3b5e1?w=800&q=80",
+    "constellation_names": ["Lyra", "Cygnus", "Aquila"]
+  },
+  {
+    "id": "SL-205",
+    "latitude": 29.7604,
+    "longitude": -95.3698,
+    "brightness_rating": 3,
+    "timestamp": "2026-03-03T19:30:00Z",
+    "photo_url": "https://images.unsplash.com/photo-1422452228503-a1d9b0b3d2a6?w=800&q=80",
+    "constellation_names": ["Gemini", "Leo"]
+  },
+  {
+    "id": "SL-206",
+    "latitude": 39.7392,
+    "longitude": -104.9903,
+    "brightness_rating": 5,
+    "timestamp": "2026-03-04T20:55:00Z",
+    "photo_url": "https://images.unsplash.com/photo-1505678261036-a3fcc5e884ee?w=800&q=80",
+    "constellation_names": ["Virgo", "Libra", "Scorpius"]
+  },
+  {
+    "id": "SL-207",
+    "latitude": 42.3601,
+    "longitude": -71.0589,
+    "brightness_rating": 1,
+    "timestamp": "2026-03-05T21:10:00Z",
+    "photo_url": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80",
+    "constellation_names": ["Draco", "Cepheus"]
+  },
+  {
+    "id": "SL-208",
+    "latitude": 38.9072,
+    "longitude": -77.0369,
+    "brightness_rating": 4,
+    "timestamp": "2026-03-06T22:20:00Z",
+    "photo_url": "https://images.unsplash.com/photo-1464802686167-b939a6910659?w=800&q=80",
+    "constellation_names": ["Sagittarius", "Capricornus"]
+  },
+  {
+    "id": "SL-209",
+    "latitude": 47.6062,
+    "longitude": -122.3321,
+    "brightness_rating": 5,
+    "timestamp": "2026-03-07T23:05:00Z",
+    "photo_url": "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?w=800&q=80",
+    "constellation_names": ["Pegasus", "Aquarius", "Pisces"]
+  },
+  {
+    "id": "SL-210",
+    "latitude": 32.7157,
+    "longitude": -117.1611,
+    "brightness_rating": 5,
+    "timestamp": "2026-03-07T20:40:00Z",
+    "photo_url": "https://images.unsplash.com/photo-1444044205806-38f3ed106c10?w=800&q=80",
+    "constellation_names": ["Crux", "Centaurus"]
   }
 ]

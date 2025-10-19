@@ -12,6 +12,7 @@ Features:
 from typing import List, Optional
 import streamlit as st
 import pandas as pd
+import json
 
 from data_loader import load_data
 from visualizations import scatter_map, heatmap_map, time_series
@@ -47,6 +48,7 @@ with col2:
 
 # Config
 # Sidebar: allow toggling mock data vs DB (DB not implemented yet)
+st.sidebar.header("SkyLore")
 use_mock = st.sidebar.checkbox("Use mock data", value=True)
 config = DEFAULT_CONFIG.copy()
 config["mode"] = "mock" if use_mock else "db"
@@ -168,17 +170,199 @@ st.sidebar.write(f"Total sky photos: {len(filtered)}")
 col1, col2 = st.columns([2,1])
 
 with col1:
-    tab1, tab2 = st.tabs(["Scatter Map", "Heat Map"])
-    
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Scatter Map", "Heat Map", "Upload", "Cultural Constellations", "About SkyLore"])
+
     with tab1:
         st.subheader("Sky Photo Submissions Scatter Map")
         scat_fig = scatter_map(filtered, center_lat=center_lat, center_lon=center_lon, radius_km=radius_km)
         st.plotly_chart(scat_fig, use_container_width=True, config={'displayModeBar': True})
-    
+
     with tab2:
         st.subheader("Geospatial Heatmap")
         heat_fig = heatmap_map(filtered, center_lat=center_lat, center_lon=center_lon, radius_km=radius_km)
         st.plotly_chart(heat_fig, use_container_width=True, config={'displayModeBar': True})
+
+    with tab3:
+        st.subheader("Upload Sky Photo Data")
+
+        st.markdown("""
+        ### Contribute to Light Pollution Research
+
+        Help us build a comprehensive database of sky conditions by uploading your own sky photos with location and brightness data.
+        """)
+
+        # Create form for individual photo upload
+        with st.form("photo_upload_form"):
+            st.markdown("#### Upload Individual Sky Photo")
+
+            # File uploader
+            uploaded_file = st.file_uploader(
+                "Choose a sky photo",
+                type=["jpg", "jpeg", "png"],
+                help="Upload a clear photo of the night sky"
+            )
+
+            # Location inputs
+            st.markdown("##### Location Information")
+            col_lat, col_lon = st.columns(2)
+
+            with col_lat:
+                latitude = st.number_input(
+                    "Latitude",
+                    min_value=-90.0,
+                    max_value=90.0,
+                    value=40.7128,
+                    step=0.0001,
+                    format="%.6f",
+                    help="Latitude where the photo was taken (e.g., 40.7128)"
+                )
+
+            with col_lon:
+                longitude = st.number_input(
+                    "Longitude",
+                    min_value=-180.0,
+                    max_value=180.0,
+                    value=-74.0060,
+                    step=0.0001,
+                    format="%.6f",
+                    help="Longitude where the photo was taken (e.g., -74.0060)"
+                )
+
+            # Brightness rating
+            st.markdown("##### Brightness Assessment")
+            brightness_rating = st.slider(
+                "Sky Brightness Rating",
+                min_value=1,
+                max_value=5,
+                value=3,
+                help="Rate the sky brightness: 1 (Very Dark) to 5 (Very Bright/Light Polluted)"
+            )
+
+
+            # Submit button
+            submitted = st.form_submit_button("📤 Submit Photo Data", type="primary")
+
+            if submitted:
+                if uploaded_file is not None:
+                    # Basic validation
+                    if -90 <= latitude <= 90 and -180 <= longitude <= 180:
+                        st.success("✅ Photo data submitted successfully!")
+                        st.markdown(f"""
+                        **Submission Summary:**
+                        - **Location:** {latitude:.6f}, {longitude:.6f}
+                        - **Brightness Rating:** {brightness_rating}/5
+                        - **File:** {uploaded_file.name}
+                        """)
+
+                        st.info("In a real implementation, this data would be saved to a database and added to the visualization.")
+
+                    else:
+                        st.error("❌ Invalid coordinates. Please check latitude (-90 to 90) and longitude (-180 to 180).")
+                else:
+                    st.error("❌ Please upload a photo file before submitting.")
+        with tab5:
+            st.markdown("""### What is SkyLore?
+
+The HackTX 2025 theme, **"Celestial,"** immediately intrigued us. During the opening ceremony’s tribute to Indigenous peoples, a question sparked our imagination:  
+*Did every ancient culture see the sky differently? Why do we only use the Roman constellations today?*  
+
+As we brainstormed, we discovered that one of our teammates had Indigenous roots — and from that connection, **SkyLore** was born. We wanted to go beyond building just an educational app. Our goal became to **combine cultural learning with citizen science** — allowing people to explore how different civilizations viewed the stars while contributing real data to modern research.  
+
+By inviting users to photograph the night sky and share their observations, SkyLore transforms cultural curiosity into meaningful impact. Each submission adds to a growing, public dataset that visualizes global **light pollution trends**, helping scientists, educators, and communities understand how our skies are changing.  
+
+As users learn about lost constellations and the stories behind them, they also become **citizen scientists**, helping preserve the beauty and knowledge of the night sky for generations to come.
+""")
+        # CSV upload section
+        st.markdown("---")
+        st.markdown("#### Bulk Upload")
+
+        st.markdown("""
+        For researchers or users with multiple photos, you can upload a CSV file with the following columns:
+        - `latitude`, `longitude`, `brightness_rating`, `timestamp`,`photo_url`
+        """)
+
+        csv_file = st.file_uploader("Upload CSV file", type="csv")
+
+        if csv_file is not None:
+            try:
+                import io
+                csv_data = pd.read_csv(io.StringIO(csv_file.getvalue().decode('utf-8')))
+                st.success(f"✅ CSV file loaded successfully! Found {len(csv_data)} entries.")
+
+                # Show preview of CSV data
+                st.markdown("##### CSV Preview:")
+                st.dataframe(csv_data.head(), use_container_width=True)
+
+                if st.button("Send Data For Review"):
+                    st.info("Data would be review and added to the database.")
+
+            except Exception as e:
+                st.error(f"❌ Error reading CSV file: {str(e)}")
+
+        # Information about data usage
+        st.markdown("---")
+        st.markdown("""
+        #### Data Usage & Privacy
+
+        **What happens to your data:**
+        - Photos and location data are used for light pollution research
+        - Data is aggregated and anonymized for scientific analysis
+        - Individual photos may be featured in research publications
+        - All data contributes to our understanding of light pollution patterns
+
+        **Privacy:** Location data is stored but never shared with third parties without consent.
+        """)
+
+    with tab4:
+        st.markdown("""
+        ### Constellations Across Cultures
+
+        Learning about different cultures through their constellations reveals how people across time and place have looked to the same stars and found unique stories, values, and ways of understanding the world. It connects astronomy with humanity, showing that the night sky is both a shared canvas and a reflection of diverse perspectives.
+        """)
+
+        # Load cultural constellations data
+        def load_cultural_data():
+        
+            with open("cultural_constellations.json", "r", encoding="utf-8") as f:
+                data = json.load(f)
+                # Convert array format to dictionary format for easier access
+                cultures_dict = {}
+                for culture_obj in data.get("cultures", []):
+                    culture_name = culture_obj.get("name", "")
+                    cultures_dict[culture_name] = culture_obj
+                return {
+                    "cultures": [c.get("name", "") for c in data.get("cultures", [])],
+                    **cultures_dict
+                }
+            
+        cultural_data = load_cultural_data()
+
+        # Culture selector
+        culture = st.selectbox(
+            "Choose a cultural tradition:",
+            cultural_data["cultures"],
+            help="Select a culture to learn about their constellation traditions"
+        )
+
+        # Display information based on selected culture
+        if culture in cultural_data:
+            culture_info = cultural_data[culture]
+
+            # Display culture name and snippet
+            st.markdown(f"#### {culture_info.get('name', culture)}")
+            if 'snippet' in culture_info:
+                st.markdown(f"*{culture_info['snippet']}*")
+
+            # Display constellations if available
+            if 'constellations' in culture_info and culture_info['constellations']:
+                st.markdown("##### Key Constellations:")
+
+                for i, constellation in enumerate(culture_info['constellations'], 1):
+                    st.markdown(f"**{i}. {constellation.get('name', 'Unknown')}**")
+                    st.markdown(f"   {constellation.get('description', 'No description available')}")
+                    st.markdown("")  # Add spacing
+
+
 
 with col2:
     tab_trends, tab_info = st.tabs(["Trends", "Info"])
@@ -234,4 +418,4 @@ with col2:
 
 st.markdown("---")
 st.markdown("Built for testing with mock JSON. Switch to DB mode by editing `DEFAULT_CONFIG` in `app.py` and implementing DB loading in `data_loader.py`.")
-st.markdown("© 2024 SkyLore Project")
+st.markdown("HackTX2025 Celestial | SkyLore Project")

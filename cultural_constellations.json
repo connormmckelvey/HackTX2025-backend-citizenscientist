@@ -1,0 +1,62 @@
+{
+    "cultures": [
+      {
+        "name": "Greco-Roman (Modern Western)",
+        "snippet": "The basis for the 88 'official' constellations recognized today by the International Astronomical Union. They are rooted in the mythology of ancient Greece and Rome.",
+        "constellations": [
+          {
+            "name": "Orion",
+            "description": "The Hunter. A prominent, easily recognizable constellation. In Greek myth, Orion was a giant hunter, often depicted battling Taurus the Bull or chasing the Pleiades."
+          },
+          {
+            "name": "Ursa Major",
+            "description": "The Great Bear. It contains the famous asterism, the Big Dipper. In one Greek myth, the nymph Callisto was turned into a bear by Zeus to protect her from Hera's wrath."
+          },
+          {
+            "name": "Cassiopeia",
+            "description": "The Queen. A 'W' or 'M' shaped constellation in the northern sky. In Greek mythology, Cassiopeia was punished by Poseidon for her vanity by being placed in the heavens."
+          },
+          {
+            "name": "Sagittarius",
+            "description": "The Archer. A zodiac constellation representing a centaur with a bow and arrow. It's associated with the mythological centaur Chiron in some interpretations."
+          }
+        ]
+      },
+      {
+        "name": "Ancient Chinese",
+        "snippet": "The Chinese system divided the sky into four main symbolic animals (or 'Symbols'), each associated with a direction and a season. These were further divided into 28 Lunar Mansions and hundreds of smaller asterisms ('Xingguan').",
+        "constellations": [
+          {
+            "name": "Azure Dragon of the East (Cāng Lóng)",
+            "description": "One of the Four Symbols, associated with Spring and the element Wood. It spans seven Lunar Mansions, representing parts of the dragon's body."
+          },
+          {
+            "name": "White Tiger of the West (Bái Hǔ)",
+            "description": "One of the Four Symbols, associated with Autumn and the element Metal. It represents the fierce guardian of the western sky."
+          },
+          {
+            "name": "Tien Ta Tsaeng (Heaven's Great General)",
+            "description": "A star group located in the area of the Western constellation Andromeda, often depicting a high-ranking military figure."
+          }
+        ]
+      },
+      {
+        "name": "Diné (Navajo)",
+        "snippet": "Navajo astronomy (Diné Siyizí) places constellations into categories like 'male,' 'female,' and 'traveling' groups, which play a role in traditional teachings and ceremonies. They focus on the functional and narrative aspects of the stars.",
+        "constellations": [
+          {
+            "name": "Átse E’tsoh (First Big One)",
+            "description": "A northern constellation, often equated with the Big Dipper. It represents a male deity who instructs the people in the order and rules of the universe."
+          },
+          {
+            "name": "Gah Hóóyeel (Rabbit Tracks)",
+            "description": "A group of stars that, when seen in the winter sky, signaled that winter was truly setting in. It’s part of a female deity's constellation, representing fertility and growth."
+          },
+          {
+            "name": "Átse Ats'oosí (First Slender One)",
+            "description": "This is the Navajo interpretation of the stars that form the modern Western constellation Orion, seen as a bow-and-arrow-wielding warrior, symbolizing protection."
+          }
+        ]
+      }
+    ]
+  }
