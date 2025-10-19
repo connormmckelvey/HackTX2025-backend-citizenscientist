@@ -25,14 +25,29 @@ def scatter_map(df: pd.DataFrame, mapbox_token: Optional[str] = None, center_lat
     if df.empty:
         return px.scatter_mapbox()
 
+    # Create constellation_info column for hover display (handles both single and multiple constellations)
+    def format_constellation_info(row):
+        if 'constellation_names' in row and isinstance(row['constellation_names'], list) and row['constellation_names']:
+            return ', '.join(row['constellation_names'])
+        elif 'constellation_name' in row and row['constellation_name']:
+            return row['constellation_name']
+        return 'Unknown'
+
+    df = df.copy()
+    df['constellation_info'] = df.apply(format_constellation_info, axis=1)
+
+    # Add fixed size column for consistent point sizing
+    df = df.copy()
+    df['point_size'] = 12  # Fixed size for all points
+
     fig = px.scatter_mapbox(
         df,
         lat="latitude",
         lon="longitude",
         color="brightness_rating",
-        size="brightness_rating",
-        # use custom_data so we can craft a clean hovertemplate
-        custom_data=["id", "constellation_name", "timestamp", "photo_url"],
+        size="point_size",  # Use fixed size column
+        # use custom_data so we can craft a clean hovertemplate - handle both single and multiple constellations
+        custom_data=["id", "constellation_info", "timestamp", "photo_url"],
         color_continuous_scale=VIBRANT_CONTINUOUS,
         size_max=12,
         zoom=3,
@@ -145,21 +160,33 @@ def scatter_map(df: pd.DataFrame, mapbox_token: Optional[str] = None, center_lat
 
 
 def heatmap_map(df: pd.DataFrame, mapbox_token: Optional[str] = None, center_lat: Optional[float] = None, center_lon: Optional[float] = None, radius_km: Optional[float] = None) -> px.density_mapbox:
-    """Return a density-style map where z is brightness_rating."""
+    """Return a true heatmap using density_mapbox with brightness-weighted z values."""
     if df.empty:
         return px.density_mapbox()
 
+    # Create a proper brightness-weighted density map
+    # We'll use the z parameter to represent brightness density
+
+    # Calculate weighted z-values that represent brightness intensity
+    # This creates a z-value that combines both density and brightness
+    heatmap_df = df.copy()
+
+    # For each point, create a z-value that represents brightness density
+    # Higher brightness = higher contribution to local density
+    heatmap_df['brightness_weight'] = heatmap_df['brightness_rating'] ** 2  # Square for more dramatic effect
+
     fig = px.density_mapbox(
-        df,
+        heatmap_df,
         lat="latitude",
         lon="longitude",
-        z="brightness_rating",
-        radius=35,
+        z="brightness_weight",  # Use brightness-weighted values
+        radius=30,  # Good balance of smoothness and detail
         center=dict(lat=df["latitude"].mean(), lon=df["longitude"].mean()),
         zoom=3,
         height=600,
         color_continuous_scale=VIBRANT_CONTINUOUS,
-        labels={"brightness_rating": "Brightness"},
+        hover_data={"brightness_weight": False},  # Hide confusing hover values
+        labels={"brightness_weight": "Brightness"},
     )
     if mapbox_token:
         fig.update_layout(mapbox=dict(accesstoken=mapbox_token, style="streets"))
@@ -170,31 +197,31 @@ def heatmap_map(df: pd.DataFrame, mapbox_token: Optional[str] = None, center_lat
     fig.update_layout(
         margin={"r":0,"t":0,"l":0,"b":0},
         paper_bgcolor="#2B1F14",
-            coloraxis_colorbar=dict(
-                len=0.9,          # match scatter map height
-                thickness=10,     # match scatter map thickness
-                title=dict(
-                    text="Brightness",
-                    side="top"
-                ),
-                ticks="outside",
-                ticktext=["1", "2", "3", "4", "5"],
-                tickvals=[1, 2, 3, 4, 5],
-                tickmode="array",
-                bgcolor="rgba(43,31,20,0.9)",  # dark brown background for dark theme
-                title_font_color="#E6E2D3",
-                tickfont_color="#E6E2D3",
-                yanchor="middle",  # center vertically
-                y=0.5,           # match scatter map position
-                xanchor="right",  # align to right
-                x=1.0,           # rightmost position
-                outlinewidth=1,   # add a thin outline
-                outlinecolor="rgba(0,0,0,0.2)"
+        coloraxis_colorbar=dict(
+            len=0.9,          # match scatter map height
+            thickness=10,     # match scatter map thickness
+            title=dict(
+                text="Brightness",
+                side="top"
             ),
-            coloraxis=dict(
-                cmin=1,          # force minimum value to 1
-                cmax=5,          # force maximum value to 5
-            )
+            ticks="outside",
+            ticktext=["1", "2", "3", "4", "5"],
+            tickvals=[1, 6, 11, 16, 25],  # Position ticks at meaningful points in the 1-25 range
+            tickmode="array",
+            bgcolor="rgba(43,31,20,0.9)",  # dark brown background for dark theme
+            title_font_color="#E6E2D3",
+            tickfont_color="#E6E2D3",
+            yanchor="middle",  # center vertically
+            y=0.5,           # match scatter map position
+            xanchor="right",  # align to right
+            x=1.0,           # rightmost position
+            outlinewidth=1,   # add a thin outline
+            outlinecolor="rgba(0,0,0,0.2)"
+        ),
+        coloraxis=dict(
+            cmin=1,          # minimum brightness weight (1^2)
+            cmax=25,         # maximum brightness weight (5^2)
+        )
     )
     # If a center point was provided, add a highlighted marker trace and circle
     if center_lat is not None and center_lon is not None:

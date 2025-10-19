@@ -16,7 +16,8 @@ The SkyLore data schema (mock JSON entries) should contain:
 - longitude: float
 - timestamp: ISO8601 string
 - brightness_rating: int (1-5)
-- constellation_name: string
+- constellation_name: string (legacy single constellation)
+- constellation_names: list of strings (new multiple constellations format)
 
 Timestamps are parsed as timezone-aware UTC timestamps to avoid tz-naive vs tz-aware
 comparison issues when filtering in the app.
@@ -42,7 +43,7 @@ def load_data(config: Dict) -> pd.DataFrame:
     """Load submissions into a DataFrame with SkyLore schema.
 
     Returns DataFrame with columns: id, photo_url, latitude, longitude, timestamp (UTC tz-aware),
-    brightness_rating, constellation_name
+    brightness_rating, constellation_name, constellation_names
     """
     mode = config.get("mode", "mock")
 
@@ -61,6 +62,7 @@ def load_data(config: Dict) -> pd.DataFrame:
                 "timestamp": _parse_timestamp_utc(entry.get("timestamp")),
                 "brightness_rating": int(entry.get("brightness_rating")),
                 "constellation_name": entry.get("constellation_name", ""),
+                "constellation_names": entry.get("constellation_names", []),
             })
 
         df = pd.DataFrame.from_records(records)

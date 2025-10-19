@@ -60,7 +60,7 @@ st.sidebar.header("Filters")
 # Minimum brightness slider
 min_brightness = st.sidebar.slider("Minimum brightness rating", min_value=1, max_value=5, value=1)
 
-# Constellation text filter
+# Constellation text filter (works with multiple constellations per entry)
 const_filter = st.sidebar.text_input("Filter by constellation (substring, case-insensitive)")
 
 # Date range
@@ -124,9 +124,19 @@ if date_range and len(date_range) == 2 and date_range[0] is not None and date_ra
 # Apply minimum brightness filter
 filtered = filtered[filtered["brightness_rating"] >= min_brightness]
 
-# Constellation filter (case-insensitive substring match)
+# Constellation filter (case-insensitive substring match) - handles both single and multiple constellations
 if const_filter:
-    filtered = filtered[filtered["constellation_name"].str.contains(const_filter, case=False, na=False)]
+    def matches_constellation(row):
+        # Handle both single constellation_name and constellation_names list
+        if 'constellation_names' in row and isinstance(row['constellation_names'], list):
+            # Multiple constellations - check if filter matches any of them
+            return any(const_filter.lower() in str(const_name).lower() for const_name in row['constellation_names'] if const_name)
+        elif 'constellation_name' in row and row['constellation_name']:
+            # Single constellation - check if filter matches
+            return const_filter.lower() in str(row['constellation_name']).lower()
+        return False
+
+    filtered = filtered[filtered.apply(matches_constellation, axis=1)]
 
 # Area filtering helper: haversine distance
 def haversine_km(lat1, lon1, lat2, lon2):
@@ -150,9 +160,9 @@ if not filtered.empty:
 else:
     area_filtered = filtered.copy()
 
-st.sidebar.write(f"Submissions in selected area: {len(area_filtered)}")
+st.sidebar.write(f"Sky photos in selected area: {len(area_filtered)}")
 
-st.sidebar.write(f"Total submissions: {len(filtered)}")
+st.sidebar.write(f"Total sky photos: {len(filtered)}")
 
 # Main layout
 col1, col2 = st.columns([2,1])
@@ -161,7 +171,7 @@ with col1:
     tab1, tab2 = st.tabs(["Scatter Map", "Heat Map"])
     
     with tab1:
-        st.subheader("Submissions Scatter Map")
+        st.subheader("Sky Photo Submissions Scatter Map")
         scat_fig = scatter_map(filtered, center_lat=center_lat, center_lon=center_lon, radius_km=radius_km)
         st.plotly_chart(scat_fig, use_container_width=True, config={'displayModeBar': True})
     
@@ -182,8 +192,8 @@ with col2:
     with tab_info:
         st.subheader("Area Info")
         st.markdown(f"**Radius:** {radius_mi} miles  ")
-        st.markdown(f"**Total submissions (after filters):** {len(filtered)}  ")
-        st.markdown(f"**Submissions in selected area:** {len(area_filtered)}  ")
+        st.markdown(f"**Total Photos (after filters):** {len(filtered)}  ")
+        st.markdown(f"**Sky photos in selected area:** {len(area_filtered)}  ")
         st.markdown("---")
         if area_filtered.empty:
             st.info("No submissions found in the selected area.")
@@ -195,7 +205,27 @@ with col2:
                         st.image(row["photo_url"], width=120)
                 with cols[1]:
                     st.markdown(f"**ID:** {row['id']}  ")
-                    st.markdown(f"**Constellation:** {row['constellation_name']}  ")
+
+                    # Handle both single and multiple constellations for display
+                    def format_constellations(row):
+                        # Try multiple constellations first (new format)
+                        if 'constellation_names' in row:
+                            constellations = row['constellation_names']
+                            if constellations and len(constellations) > 0:
+                                # Filter out empty strings and join
+                                valid_constellations = [c for c in constellations if c and str(c).strip()]
+                                if valid_constellations:
+                                    return ', '.join(valid_constellations)
+
+                        # Fall back to single constellation (legacy format)
+                        if 'constellation_name' in row and row['constellation_name']:
+                            constellation = row['constellation_name']
+                            if constellation and str(constellation).strip():
+                                return str(constellation).strip()
+
+                        return 'Unknown'
+
+                    st.markdown(f"**Constellation:** {format_constellations(row)}  ")
                     st.markdown(f"**Brightness:** {row['brightness_rating']}  ")
                     st.markdown(f"**Timestamp:** {row['timestamp']}  ")
                     st.markdown(f"**Location:** {row['latitude']}, {row['longitude']}  ")
