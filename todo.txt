@@ -1,0 +1,6 @@
+video filming
+video edit
+slide deck edit
+implement db
+send uploads to api
+pull from json
