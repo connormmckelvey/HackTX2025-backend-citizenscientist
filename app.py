@@ -33,7 +33,7 @@ with col1:
     st.markdown("""
         <div style="padding: 20px 0; display: flex; flex-direction: column; justify-content: center; height: 100%;">
             <h1 style="font-size: 2.5rem; margin: 0; padding: 0; line-height: 1.2; text-align: left;">Brighten Our Stars, Discover the Stories Above</h1>
-            <p style="font-size: 1rem; color: #E6E2D3; margin: 8px 0 0 0; padding: 0; text-align: left; opacity: 0.9;">SkyLoreUsing your citizen science data to help us understand light pollution trends</p>
+            <p style="font-size: 1rem; color: #E6E2D3; margin: 8px 0 0 0; padding: 0; text-align: left; opacity: 0.9;">SkyLore is using your citizen science data to help us understand light pollution trends</p>
         </div>
     """, unsafe_allow_html=True)
 
