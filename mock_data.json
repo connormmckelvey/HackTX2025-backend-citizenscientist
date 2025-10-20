@@ -753,5 +753,41 @@
     "constellation_names": [
       "Bootes"
     ]
+  },
+  {
+    "id": "U-20251019161030518065",
+    "photo_url": "C:\\Users\\conno\\OneDrive\\Documents\\GitHub\\HackTX2025-backend-citizenscientist\\uploads\\20251019161030_teststarphoto.jpeg",
+    "latitude": 40.71239999999999,
+    "longitude": -74.006,
+    "timestamp": "2025-10-19T16:10:30.518625Z",
+    "brightness_rating": 2,
+    "constellation_name": "Bootes",
+    "constellation_names": [
+      "Bootes"
+    ]
+  },
+  {
+    "id": "U-20251019195655085147",
+    "photo_url": "uploads\\20251019195655_teststarphoto.jpeg",
+    "latitude": 40.7128,
+    "longitude": -74.006,
+    "timestamp": "2025-10-19T19:56:55.085409Z",
+    "brightness_rating": 3,
+    "constellation_name": "Bootes",
+    "constellation_names": [
+      "Bootes"
+    ]
+  },
+  {
+    "id": "U-20251019201556536643",
+    "photo_url": "uploads\\20251019201556_teststarphoto.jpeg",
+    "latitude": 40.7128,
+    "longitude": -118.006,
+    "timestamp": "2025-10-19T20:15:56.537268Z",
+    "brightness_rating": 4,
+    "constellation_name": "Bootes",
+    "constellation_names": [
+      "Bootes"
+    ]
   }
 ]

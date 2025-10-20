@@ -332,17 +332,19 @@ with col1:
                             from datetime import datetime
 
                             # Save uploaded image to a persistent local uploads/ folder
-                            uploads_dir = os.path.join(os.getcwd(), "uploads")
-                            os.makedirs(uploads_dir, exist_ok=True)
+                            uploads_dir_rel = os.path.join("uploads")
+                            uploads_dir_abs = os.path.join(os.getcwd(), uploads_dir_rel)
+                            os.makedirs(uploads_dir_abs, exist_ok=True)
                             saved_filename = f"{datetime.utcnow().strftime('%Y%m%d%H%M%S')}_{uploaded_file.name}"
-                            saved_path = os.path.join(uploads_dir, saved_filename)
-                            with open(saved_path, "wb") as out_f:
+                            saved_path_abs = os.path.join(uploads_dir_abs, saved_filename)
+                            saved_path_rel = os.path.join(uploads_dir_rel, saved_filename)
+                            with open(saved_path_abs, "wb") as out_f:
                                 out_f.write(uploaded_file.getbuffer())
 
                             # Normalize record
                             new_record = {
                                 "id": f"U-{datetime.utcnow().strftime('%Y%m%d%H%M%S%f')}",
-                                "photo_url": saved_path,  # local path usable by st.image
+                                "photo_url": saved_path_rel,  # store relative path for portability
                                 "latitude": float(latitude),
                                 "longitude": float(longitude),
                                 "timestamp": datetime.utcnow().isoformat() + "Z",
@@ -639,7 +641,16 @@ with col2:
                 cols = st.columns([1,3])
                 with cols[0]:
                     if row.get("photo_url"):
-                        st.image(row["photo_url"], width=120)
+                        try:
+                            photo_src = row["photo_url"]
+                            if isinstance(photo_src, str) and (photo_src.startswith("http://") or photo_src.startswith("https://")):
+                                st.image(photo_src, width=120)
+                            else:
+                                # treat as local filesystem path (relative or absolute)
+                                with open(photo_src, "rb") as fimg:
+                                    st.image(fimg.read(), width=120)
+                        except Exception:
+                            st.warning("Image unavailable")
                 with cols[1]:
 
                     # Handle both single and multiple constellations for display
